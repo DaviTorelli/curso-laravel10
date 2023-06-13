@@ -19,3 +19,9 @@ Gostaria de agradecer ao [Alberto França](https://github.com/nunofranca), criad
 Além disso, gostaria de agradecer ao [Lucas Rocha](https://github.com/lucascudo) por compartilhar o repositório [laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization). Segui o passo-a-passo fornecido nesse repositório para trazer dados em português, como na _Seeder_, o que foi extremamente útil para o meu projeto.
 
 Esses recursos adicionais me ajudaram a aprimorar meu conhecimento no Laravel e fornecer uma experiência ainda melhor aos usuários da minha aplicação.
+
+## Comandos
+
+Para rodar as _migrations_ juntamente às _seeders_ de forma mais rápida, recomendo o uso do comando:
+
+`php artisan migrate:refresh --seed`

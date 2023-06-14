@@ -11,7 +11,9 @@
 
 <body>
     <main class="container">
-        <h1>ADD</h1>
+        <div class="mt-3 row">
+            <h1>Adicionar usuário</h1>
+        </div>
         <form method="post" action="{{ route('user.store') }}">
             @csrf
             @method('post')
@@ -27,7 +29,12 @@
                 <label for="password">Senha</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Adicionar</button>
+            <div class="mt-3 row">
+                <div class="d-flex align-items-center justify-content-between">
+                    <a type="button" class="btn btn-secondary mt-3" href="{{ route('user.index') }}">Voltar</a>
+                    <button type="submit" class="btn btn-primary mt-3">Adicionar</button>
+                </div>
+            </div>
         </form>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

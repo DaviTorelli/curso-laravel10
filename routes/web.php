@@ -14,33 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//* Entendendo a estrutura das rotas.
-// Route::get($uri, $callback);
-// Route::post($uri, $callback);
-// Route::put($uri, $callback);
-// Route::patch($uri, $callback);
-// Route::delete($uri, $callback);
-// Route::options($uri, $callback);
-
-// Route::match(['get', 'post'], '/', function () {
-
-// });
-
-// Route::any('/', function () {
-
-// });
-
-//* Antes, sem agrupamento
-// Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
-// Route::post('/users/create', [UserController::class, 'store'])->name('user.store');
-// Route::get('/users', [UserController::class, 'index'])->name('user.index');
-// Route::get('/users/{id?}', [UserController::class, 'show'])->name('user.show');
-// Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-// Route::put('/users/update/{id}', [UserController::class, 'update'])->name('user.update');
-// Route::delete('/users/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-//* Depois, com as rotas agrupadas
-// Dessa forma, evita repetição de código e facilita a manutenção e alteração de parâmetros e nomes, caso desejado
 Route::prefix('users')->name('user.')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -49,7 +22,6 @@ Route::prefix('users')->name('user.')->controller(UserController::class)->group(
             return redirect()->route('user.index');
         })
         ->name('show');
-    //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
     Route::post('/create', 'store')->name('store');
     Route::get('/edit/{user}', 'edit')->name('edit');
     Route::put('/update/{user}', 'update')->name('update');

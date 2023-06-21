@@ -51,9 +51,9 @@ Route::prefix('users')->name('user.')->controller(UserController::class)->group(
         ->name('show');
     //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
     Route::post('/create', 'store')->name('store');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    Route::get('/edit/{user}', 'edit')->name('edit');
+    Route::put('/update/{user}', 'update')->name('update');
+    Route::delete('/destroy/{user}', 'destroy')->name('destroy');
 });
 
 Route::fallback(function () {

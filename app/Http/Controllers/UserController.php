@@ -55,19 +55,17 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($user)
     {
-        $user = User::find($id);
         return view('user.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $user)
     {
         $data = $request->only(['name', 'email']);
-        $user = User::find($id);
         $user->update($data);
         return redirect()->route('user.index');
     }
@@ -75,9 +73,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($user)
     {
-        $user = User::find($id);
         $user->delete();
         return redirect()->back();
     }

@@ -12,8 +12,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get();
-        return view('user.index', ['users' => $users]);
+        //* Inspecionando a rota
+        if (request()->route()->named('user.index')) {
+            $users = User::get();
+            return view('user.index', ['users' => $users]);
+        };
     }
 
     /**
@@ -32,7 +35,12 @@ class UserController extends Controller
         $data = $request->only(['name', 'email', 'password']);
         $data['password'] = bcrypt($data['password']);
         User::create($data);
-        return redirect()->back();
+
+        //* Nesse caso, redirecionamos para uma URI específica, passando seu _path_
+        // return redirect()->to('/users');
+
+        //* Já nesse caso, redirecionamos para o ->name() da rota, passado no arquivo web.php
+        return redirect()->route('user.index');
     }
 
     /**
@@ -61,7 +69,7 @@ class UserController extends Controller
         $data = $request->only(['name', 'email']);
         $user = User::find($id);
         $user->update($data);
-        return redirect()->back();
+        return redirect()->route('user.index');
     }
 
     /**

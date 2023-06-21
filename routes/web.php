@@ -44,9 +44,18 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('users')->name('user.')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
-    Route::get('/{user}', 'show')->name('show'); //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
+    Route::get('/{user}', 'show')
+        ->missing(function () {
+            return redirect()->route('user.index');
+        })
+        ->name('show');
+    //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
     Route::post('/create', 'store')->name('store');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::put('/update/{id}', 'update')->name('update');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+});
+
+Route::fallback(function () {
+    return redirect()->route('user.index');
 });

@@ -41,20 +41,31 @@ use Illuminate\Support\Facades\Route;
 
 //* Depois, com as rotas agrupadas
 // Dessa forma, evita repetição de código e facilita a manutenção e alteração de parâmetros e nomes, caso desejado
-Route::prefix('users')->name('user.')->controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{user}', 'show')
-        ->missing(function () {
-            return redirect()->route('user.index');
-        })
-        ->name('show');
-    //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
-    Route::post('/create', 'store')->name('store');
-    Route::get('/edit/{user}', 'edit')->name('edit');
-    Route::put('/update/{user}', 'update')->name('update');
-    Route::delete('/destroy/{user}', 'destroy')->name('destroy');
-});
+// Route::prefix('users')->name('user.')->controller(UserController::class)->group(function () {
+//     Route::get('/', 'index')->name('index');
+//     Route::get('/create', 'create')->name('create');
+//     Route::get('/{user}', 'show')
+//         ->missing(function () {
+//             return redirect()->route('user.index');
+//         })
+//         ->name('show');
+//     //->withTrashed(); //*traz usuários que foram deletados (graças ao SoftDeletes adicionado)
+//     Route::post('/create', 'store')->name('store');
+//     Route::get('/edit/{user}', 'edit')->name('edit');
+//     Route::put('/update/{user}', 'update')->name('update');
+//     Route::delete('/destroy/{user}', 'destroy')->name('destroy');
+// });
+
+//* Aplicando o routes resource
+Route::resource('/users', UserController::class)->names([
+    'index' => 'user.index',
+    'create' => 'user.create',
+    'store' => 'user.store',
+    'show' => 'user.show',
+    'edit' => 'user.edit',
+    'update' => 'user.update',
+    'destroy' => 'user.destroy',
+]);
 
 Route::fallback(function () {
     return redirect()->route('user.index');

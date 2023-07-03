@@ -16,6 +16,11 @@
         </div>
         <form method="post" action="{{ route('user.store') }}">
             @csrf
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+            @endforeach
             @method('post')
             <div class="form-group">
                 <label for="name">Nome</label>

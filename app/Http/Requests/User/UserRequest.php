@@ -30,6 +30,13 @@ class UserRequest extends FormRequest
                     'password' => 'required|string',
                 ];
                 break;
+            case 'update':
+                return [
+                    'name' => 'required|string',
+                    'email' => 'required|email|string',
+                    'old_password' => 'sometimes',
+                    'new_password' => 'required_with:old_password',
+                ];
             default:
                 return [];
                 break;
@@ -41,6 +48,7 @@ class UserRequest extends FormRequest
         return [
             'required' => 'O campo :attribute é obrigatório',
             'email' => 'E-mail inválido',
+            'required_with' => 'O campo Nova Senha é obrigatório quando a "Senha" é digitada. '
         ];
     }
 }

@@ -39,9 +39,15 @@ class UserController extends Controller
         return view('user.edit', ['user' => $user]);
     }
 
-    public function update(Request $request, $user)
+    public function update(UserRequest $request, $user)
     {
-        $data = $request->only(['name', 'email']);
+        $data = $request->validated();
+        if ($data['old_password']) {
+            if (!password_verify($data['old_password'], $user->password)) {
+                return redirect()->back()->withErrors(['old_password' => 'Senha incorreta']);
+            }
+            $data['password'] = bcrypt($data['new_password']);
+        }
         $user->update($data);
         return redirect()->route('user.index');
     }

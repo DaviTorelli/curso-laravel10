@@ -16,18 +16,41 @@
         </div>
         <form method="post" action="{{ route('user.store') }}">
             @csrf
+            {{-- @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+            @endforeach --}}
             @method('post')
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                    name="name">
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                <input type="text" class="form-control  @error('email') is-invalid @enderror" id="email"
+                    name="email" aria-describedby="emailHelp">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control  @error('password') is-invalid @enderror" id="password"
+                    name="password">
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mt-3 row">
                 <div class="d-flex align-items-center justify-content-between">

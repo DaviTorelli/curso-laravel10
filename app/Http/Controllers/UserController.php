@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,9 @@ class UserController extends Controller
         return view('user.create');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $data = $request->only(['name', 'email', 'password']);
+        $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         User::create($data);
         return redirect()->route('user.index');

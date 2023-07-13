@@ -25,8 +25,9 @@ class UserRequest extends FormRequest
         switch (strtolower($this->route()->getActionMethod())):
             case 'store':
                 return [
-                    'name' => 'string|required',
-                    'email' => 'string|required|email',
+                    'name' => 'required|string',
+                    'email' => 'required|email|string',
+                    'password' => 'required|string',
                 ];
                 break;
             default:

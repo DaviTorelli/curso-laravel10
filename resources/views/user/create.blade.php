@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="name">Nome</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                    name="name">
+                    name="name" value="{{ old('name') }}">
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -34,8 +34,8 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control  @error('email') is-invalid @enderror" id="email"
-                    name="email" aria-describedby="emailHelp">
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
+                    name="email" value="{{ old('email') }}" aria-describedby="emailHelp">
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -44,8 +44,8 @@
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" class="form-control  @error('password') is-invalid @enderror" id="password"
-                    name="password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
+                    name="password" value="{{ old('password') }}">
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}

@@ -19,12 +19,43 @@
             @method('put')
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" value="{{ $user->name }}" class="form-control" id="name" name="name">
+                <input type="text" value="{{ $user->name }}"
+                    class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" value="{{ $user->email }}" class="form-control" id="email" name="email"
+                <input type="text" value="{{ $user->email }}"
+                    class="form-control @error('email') is-invalid @enderror" id="email" name="email"
                     aria-describedby="emailHelp">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <h6 class="mt-3">Editar senha</h6>
+            <div class="form-group">
+                <label for="old_password">Senha</label>
+                <input type="password" class="form-control @error('old_password') is-invalid @enderror "
+                    id="old_password" name="old_password" value="{{ old('old_password') }}">
+                @error('old_password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="new_password">Nova Senha</label>
+                <input type="password" class="form-control @error('new_password') is-invalid @enderror "
+                    id="new_password" name="new_password" value="{{ old('new_password') }}">
+                @error('new_password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mt-3 row">
                 <div class="d-flex align-items-center justify-content-between">
